@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import Dice from '../dice';
-import Wheel from '../wheel';
+import Matchs from '../matchs';
+import Messages from '../messages';
+import Loader from '../common/loader';
+import Authentication from '../authentication';
 
 const styles = StyleSheet.create({
   container: {
@@ -26,22 +28,34 @@ const styles = StyleSheet.create({
 });
 
 const Menu = () => {
-  const [selectedGame, setSelectedGame] = useState('dice');
+  const [loader, setLoader] = useState(true);
+  const [userConnected, setUserConnected] = useState(false);
+  const [selectedPage, setSelectedPage] = useState<string | null>(null);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoader(false);
+      setUserConnected(true);
+      setSelectedPage(userConnected ? 'matchs' : 'authentication');
+    }, 2000);
+  });
 
   return (
     <View style={styles.container}>
-      {selectedGame === 'dice' && <Dice />}
-      {selectedGame === 'wheel' && <Wheel />}
+      {loader && <Loader />}
+      {selectedPage === 'authentication' && <Authentication />}
+      {selectedPage === 'matchs' && <Matchs />}
+      {selectedPage === 'messages' && <Messages />}
 
       <View style={styles.itemsContainer}>
-        <TouchableOpacity onPress={() => setSelectedGame('dice')}>
-          <Text style={styles.TextItems}>Dés</Text>
+        <TouchableOpacity onPress={() => setSelectedPage('matchs')}>
+          <Text style={styles.TextItems}>matchs</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setSelectedGame('wheel')}>
-          <Text style={styles.TextItems}>Roue</Text>
+        <TouchableOpacity onPress={() => setSelectedPage('messages')}>
+          <Text style={styles.TextItems}>messages</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => setSelectedGame('puissance4')}>
-          <Text style={styles.TextItems}>Puissance 4</Text>
+        <TouchableOpacity onPress={() => setSelectedPage('profile')}>
+          <Text style={styles.TextItems}>profile</Text>
         </TouchableOpacity>
       </View>
     </View>
