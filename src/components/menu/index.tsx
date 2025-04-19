@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import Matchs from '../matchs';
 import Messages from '../messages';
-import Loader from '../common/loader';
-import Authentication from '../authentication';
 
 const styles = StyleSheet.create({
   container: {
@@ -28,22 +26,10 @@ const styles = StyleSheet.create({
 });
 
 const Menu = () => {
-  const [loader, setLoader] = useState(true);
-  const [userConnected, setUserConnected] = useState(false);
-  const [selectedPage, setSelectedPage] = useState<string | null>(null);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoader(false);
-      setUserConnected(true);
-      setSelectedPage(userConnected ? 'matchs' : 'authentication');
-    }, 2000);
-  });
+  const [selectedPage, setSelectedPage] = useState<string | null>('matchs');
 
   return (
     <View style={styles.container}>
-      {loader && <Loader />}
-      {selectedPage === 'authentication' && <Authentication />}
       {selectedPage === 'matchs' && <Matchs />}
       {selectedPage === 'messages' && <Messages />}
 
