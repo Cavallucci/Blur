@@ -1,16 +1,19 @@
-import { Text, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 const styles = {
     container: {
+        display: 'flex',
+        padding: 20,
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        padding: 50,
     },
     button: {
-        padding: 20,
+        padding: 10,
         borderRadius: 50,
-        backgroundColor: 'grey',
+        backgroundColor: 'darkorange',
+        opacity: 0.9,
     },
 };
 
@@ -21,16 +24,16 @@ const Swipe = () => {
     };
 
     const handleRight = () => {
-        console.log('left');
+        console.log('right');
     };
 
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.button} onPress={handleLeft} activeOpacity={0.7}>
-                <Text>Left</Text>
+                <Entypo name="cross" size={70} color="white" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={handleRight} activeOpacity={0.7}>
-                <Text>Right</Text>
+                <Entypo name="heart" size={70} color="white" />
             </TouchableOpacity>
         </View>
     );

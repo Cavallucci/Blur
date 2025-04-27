@@ -3,17 +3,19 @@ import { MatchType } from '../../types';
 
 const styles = {
     pictureInfosContainer: {
+        flexDirection: 'column',
+        marginLeft: 20,
+        marginRight: 20,
         borderRadius: 50,
-        justifyContent: 'center',
         marginTop: 50,
         paddingBottom: 50,
-        borderColor: 'lightgrey',
-        borderWidth: 1,
+        borderColor: 'darkorange',
+        borderWidth: 0.5,
     },
     profilePicture: {
         borderRadius: 50,
-        height: 350,
-        width: 350,
+        height: 370,
+        width: 370,
     },
     infosContainer: {
         justifyContent: 'space-evenly',
@@ -42,11 +44,11 @@ const styles = {
     },
 };
 
-type CardMatchProps = {
+type ResumMatchViewProps = {
     match: MatchType;
 }
 
-const CardMatch = ({ match }: CardMatchProps) => {
+const ResumMatchView = ({ match }: ResumMatchViewProps) => {
     return (
     <View style={styles.pictureInfosContainer}>
         <Image
@@ -63,10 +65,12 @@ const CardMatch = ({ match }: CardMatchProps) => {
             </View>
         ))}
         </View>
-        <Text style={styles.description}>{match?.description}</Text>
+        <Text style={styles.description}>
+            {match?.description?.slice(0, 50)}{match?.description?.length > 50 ? '…' : ''}
+        </Text>
         </View>
     </View>
     );
 };
 
-export default CardMatch;
+export default ResumMatchView;
